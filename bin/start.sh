@@ -10,17 +10,19 @@ rm -rf loginserver*.out
 rm -rf gameserver*.out
 rm -rf sharedserver*.out
 
-sleep 3
-./login &
+sleep 60 # wait for DB container startup
+./loginserver -f ../conf/loginserver.conf &
 echo "login server started"
 
 sleep 1
-./share &
+./sharedserver -f ../conf/sharedserver.conf &
 echo "shared server started"
 
 sleep 1
-./game &
+./gameserver -f ../conf/gameserver.conf &
 echo "game server started"
 
 
 echo "ALL - START"
+
+tail -f /dev/null

@@ -30,7 +30,7 @@ CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(GSDIR) -I$(TOSDIR) -I$(DBDIR) -I$(LSDIR) -I$(SERVDIR)
 #INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(TOSDIR)
-CCFLAGS  = -Wall -c -g 
+CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mpclmul
 #CCFLAGS  = -Wall -c -g 
 
 TARGET1 = $(LIBDIR)/libTheOneServerPackets.a

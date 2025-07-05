@@ -31,7 +31,7 @@ CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT -D__GAME_SERVER__
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(DBDIR) -I$(GSDIR) -I.
 #CCFLAGS  = -Wall -c -g  
-CCFLAGS  = -Wall -c -g 
+CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mpclmul
 
 DEPDIR = .deps
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d

@@ -28,7 +28,7 @@ UCDIR   = $(CLIDIR)/updateclient
 CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT -D__UPDATE_SERVER__
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(USDIR) -I$(SERVDIR)
-CCFLAGS  = -Wall -c -g 
+CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mpclmul
 #CCFLAGS  = -Wall -c -g 
 
 TARGET1 = $(LIBDIR)/libUpdateServerPackets.a

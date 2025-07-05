@@ -34,7 +34,7 @@ CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT -D__GAME_SERVER__ 
 #-D__QUEST_TEST__
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(DBDIR) -I$(GSDIR) -I$(SKILLDIR) -I$(ITEMDIR) -I$(QUESTDIR) -I.
-CCFLAGS  = -Wall -c -g  
+CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mpclmul
 #CCFLAGS  = -Wall -c -g 
 
 #LIBS     = -L$(LIBDIR) -lGameServerDatabase -lServerCore -lGameServerPackets -lCore

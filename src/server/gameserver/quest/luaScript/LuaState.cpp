@@ -71,7 +71,7 @@ void LuaState::randomseed() {
 //--------------------------------------------------------------------------------
 void LuaState::open(int stackSize) {
 	release();
-	m_pState = lua_open();
+	m_pState = luaL_newstate();
 }
 
 //--------------------------------------------------------------------------------

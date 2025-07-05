@@ -1,35 +1,89 @@
-version: '3'
-
 services:
-
   odk-mysql:
-    image: mysql/mysql-server:5.7
-    volumes:
-      - ../initdb:/docker-entrypoint-initdb.d/
-    environment:
-        MYSQL_ROOT_PASSWORD: 123456
     restart: on-failure
-    command: mysqld --sql_mode="ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+    image: percona/percona-server:8.4.5
+    command: mysqld
+      --sql_mode="ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+    volumes:
+      - /mnt/Projects/opendarkeden-server/initdb:/docker-entrypoint-initdb.d/
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - TZ=Europe/Copenhagen
     networks:
       - odk-network
 
-  odk-server:
-    image: tiancaiamao/darkeden:latest
-    build:
-      context: ..
-      dockerfile: Dockerfile
-    command: ["sleep","infinity"]
+  odk-loginserver:
+    restart: unless-stopped
+    image: askefc/darkeden
+    entrypoint:
+      - /bin/bash
+      - -c
+    command:
+      - |
+        killall loginserver
+        sleep 1
+        rm -rf loginserver*.out
+        sleep 60
+        ./loginserver -f ../conf/loginserver.conf
     ports:
-      - "9999:9999"
-      - "9998:9998"
-      - "9997:9997"
-      - "9997:9997/udp"
-    # volumes:
-    #   - ../bin/:/home/darkeden/vs/bin/
-    #   - ./conf/:/home/darkeden/vs/conf/
-    #   - ../data/:/home/darkeden/vs/data/
+      - 9999:9999
+      - 9996:9996/udp
+      - 9900:9900
+      - 9800:9800/udp
     networks:
       - odk-network
+    depends_on:
+      - odk-mysql
+    environment:
+      - TZ=Europe/Copenhagen
+
+  odk-sharedserver:
+    restart: unless-stopped
+    image: askefc/darkeden
+    entrypoint:
+      - /bin/bash
+      - -c
+    command:
+      - |
+        killall sharedserver
+        sleep 1
+        rm -rf sharedserver*.out
+        sleep 60
+        ./sharedserver -f ../conf/sharedserver.conf
+    ports:
+      - 9977:9977
+    networks:
+      - odk-network
+    depends_on:
+      - odk-mysql
+      - odk-loginserver
+    environment:
+      - TZ=Europe/Copenhagen
+
+  odk-gameserver:
+    restart: unless-stopped
+    image: askefc/darkeden
+    entrypoint:
+      - /bin/bash
+      - -c
+    command:
+      - |
+        killall gameserver
+        sleep 1
+        rm -rf gameserver*.out
+        sleep 60
+        ./gameserver -f ../conf/gameserver.conf
+    ports:
+      - 9998:9998
+      - 9997:9997/udp
+    networks:
+      - odk-network
+    depends_on:
+      - odk-mysql
+      - odk-loginserver
+      - odk-sharedserver
+    environment:
+      - TZ=Europe/Copenhagen
 
 networks:
-  odk-network:
+  odk-network: {}

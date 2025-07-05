@@ -614,7 +614,7 @@ SRCS = $(CORE_SRCS) $(LC_PACKET_SRC) $(LG_PACKET_SRC) $(CL_PACKET_SRC) $(GL_PACK
 CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT
 INCLUDES = -I./loki -I$(SERVDIR) -I$(DBDIR) -I$(GSDIR) -I$(SKILLDIR) -I$(ITEMDIR) -I$(BILLINGDIR) -I.
-CCFLAGS  = -Wall -c -g  
+CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mpclmul
 
 # .cpp.o : 
 # 	$(CC) $(CCFLAGS) $(DEFS) $(INCLUDES) $<

@@ -10,9 +10,12 @@
 
 extern "C" 
 {
-	#include <lua5.1/lua.h>
-	#include <lua5.1/lualib.h>
-	#include <lua5.1/lauxlib.h>
+	#include <lua5.4/lua.h>
+	#include <lua5.4/lualib.h>
+	#include <lua5.4/lauxlib.h>
+//	#include <lua5.1/lua.h>
+//	#include <lua5.1/lualib.h>
+//	#include <lua5.1/lauxlib.h>
 }
 
 

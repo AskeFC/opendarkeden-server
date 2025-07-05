@@ -39,12 +39,12 @@ PYINCDIR = /usr/local/include/python2.2
 CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT -D__GAME_SERVER__  -D__COMBAT__
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(DBDIR) -I$(SKILLDIR) -I$(ITEMDIR) -I$(BILLINGDIR) -I$(WARDIR) -I$(COUPLEDIR) -I$(TESTDIR) -I$(MISSIONDIR) -I.
-CCFLAGS  = -Wall -c -g 
+CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mpclmul
 #CCFLAGS  = -Wall -c -g 
 #LIBS     = -L$(LIBDIR) -lItems -lQuest -lMofus -lGameServerDatabase -lServerCore -lGameServerPackets -lSkill -lCore -lGameServerBilling -lLuaScript -lGameServerTest -lWar -lCouple -lMission -lCTF -lGameServerCBilling -lxerces-c -lsicuuc -lsicudata -lCSAuth
 LIBS     = -L$(LIBDIR) -lItems -lQuest -lMofus -lGameServerDatabase -lServerCore -lGameServerPackets -lSkill -lCore -lGameServerBilling -lLuaScript -lWar -lCouple -lMission -lCTF -lGameServerCBilling
 #SYSLIBS  = -L$(MYSQLDIR) -static -lpthread -lnsl -lutil -ldl -lmysqlclient -llua -llualib -lz -lcppunit
-SYSLIBS  = -lpthread -lnsl -lutil -lmysqlclient -llua5.1 -lxerces-c -ldl -lz
+SYSLIBS  = -lpthread -lnsl -lutil -lmysqlclient -llua5.4 -lxerces-c -ldl -lz
 
 DEPDIR = .deps
 DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.d

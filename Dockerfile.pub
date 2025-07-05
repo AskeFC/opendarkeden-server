@@ -1,17 +1,24 @@
-FROM ubuntu:20.04
+FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt update && apt install -y \
-    libxerces-c-dev \
-    libmysqlclient-dev \
-    liblua5.1-dev \
+RUN apt update && apt upgrade -y && apt install -y \
+    libxerces-c3.2t64 \
+    libmysqlclient21 \
+    liblua5.4-0 \
+    libnsl2 \
     psmisc \
+    tzdata \
     && rm -rf /var/lib/apt/lists/*
+#    libxerces-c-dev \
+#    libmysqlclient-dev \
+#    liblua5.1-dev \
 
-RUN mkdir /home/darkeden
-RUN mkdir /home/darkeden/vs
-RUN mkdir /home/darkeden/vs/src
+#    libxerces-c3.2t64 \
+#    libmysqlclient21 \
+#    liblua5.1-0 \
+
+RUN mkdir /home/darkeden /home/darkeden/vs /home/darkeden/vs/src
 
 COPY bin /home/darkeden/vs/bin/
 COPY data /home/darkeden/vs/data/

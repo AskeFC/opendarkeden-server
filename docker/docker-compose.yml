@@ -4,14 +4,25 @@ services:
     image: percona/percona-server:8.4.5
     command: mysqld
       --sql_mode="ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+      --mysql-native-password="ON" --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u elcastle -pelca110
+      start_period: 5s
+      start_interval: 5s
+      interval: 3s
+      timeout: 3s
+      retries: 69
+    ports:
+      - 3306:3306
     volumes:
       - /mnt/Projects/opendarkeden-server/initdb:/docker-entrypoint-initdb.d/
+      - /mnt/Projects/opendarkeden-server/DATABASE:/var/lib/mysql:z
     environment:
       - MYSQL_ROOT_PASSWORD=123456
       - TZ=Europe/Copenhagen
     networks:
       - odk-network
-
   odk-loginserver:
     restart: unless-stopped
     image: askefc/darkeden
@@ -20,11 +31,14 @@ services:
       - -c
     command:
       - |
-        killall loginserver
-        sleep 1
-        rm -rf loginserver*.out
-        sleep 60
         ./loginserver -f ../conf/loginserver.conf
+    healthcheck:
+      test: bash -c "printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/localhost/9999 || exit 1"
+      start_period: 5s
+      start_interval: 5s
+      interval: 30s
+      timeout: 5s
+      retries: 69
     ports:
       - 9999:9999
       - 9996:9996/udp
@@ -33,10 +47,11 @@ services:
     networks:
       - odk-network
     depends_on:
-      - odk-mysql
+      odk-mysql:
+        condition: service_healthy
+        restart: true
     environment:
       - TZ=Europe/Copenhagen
-
   odk-sharedserver:
     restart: unless-stopped
     image: askefc/darkeden
@@ -45,21 +60,27 @@ services:
       - -c
     command:
       - |
-        killall sharedserver
-        sleep 1
-        rm -rf sharedserver*.out
-        sleep 60
         ./sharedserver -f ../conf/sharedserver.conf
+    healthcheck:
+      test: bash -c "printf \"GET / HTTP/1.1\n\n\" > /dev/tcp/localhost/9977 || exit 1"
+      start_period: 5s
+      start_interval: 5s
+      interval: 10s
+      timeout: 5s
+      retries: 69
     ports:
       - 9977:9977
     networks:
       - odk-network
     depends_on:
-      - odk-mysql
-      - odk-loginserver
+      odk-mysql:
+        condition: service_healthy
+        restart: true
+      odk-loginserver:
+        condition: service_healthy
+        restart: true
     environment:
       - TZ=Europe/Copenhagen
-
   odk-gameserver:
     restart: unless-stopped
     image: askefc/darkeden
@@ -68,22 +89,30 @@ services:
       - -c
     command:
       - |
-        killall gameserver
-        sleep 1
-        rm -rf gameserver*.out
-        sleep 60
         ./gameserver -f ../conf/gameserver.conf
+    healthcheck:
+      test: bash -c "printf \"GET / HTTP/1.1\n\n\" > /dev/udp/localhost/9997 || exit 1"
+      start_period: 5s
+      start_interval: 5s
+      interval: 5s
+      timeout: 5s
+      retries: 69
     ports:
       - 9998:9998
       - 9997:9997/udp
     networks:
       - odk-network
     depends_on:
-      - odk-mysql
-      - odk-loginserver
-      - odk-sharedserver
+      odk-mysql:
+        condition: service_healthy
+        restart: true
+      odk-loginserver:
+        condition: service_healthy
+        restart: true
+      odk-sharedserver:
+        condition: service_healthy
+        restart: true
     environment:
       - TZ=Europe/Copenhagen
-
 networks:
   odk-network: {}

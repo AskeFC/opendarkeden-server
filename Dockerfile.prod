@@ -1,0 +1,19 @@
+FROM cachyos/cachyos-v3
+
+RUN pacman -Syyu --noconfirm && pacman -S --noconfirm \
+    xerces-c \
+    percona-server-clients \
+    lua \
+    xorg-xprop xorg-xwininfo \
+    libnsl \
+    psmisc \
+    tzdata
+
+RUN mkdir /home/darkeden /home/darkeden/vs /home/darkeden/vs/src && \
+    ln -s /usr/lib/libperconaserverclient.so /usr/lib/libmysqlclient.so
+
+COPY bin /home/darkeden/vs/bin/
+COPY data /home/darkeden/vs/data/
+COPY docker/conf /home/darkeden/vs/conf/
+
+WORKDIR /home/darkeden/vs/bin

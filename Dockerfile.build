@@ -1,0 +1,21 @@
+FROM cachyos/cachyos-v3
+
+RUN pacman -Syyu --noconfirm && pacman -S --noconfirm \
+    gcc \
+    base-devel \
+    xerces-c \
+    percona-server-clients \
+    lua \
+    xorg-xprop xorg-xwininfo \
+    libnsl \
+    psmisc
+
+RUN mkdir \
+    /usr/include/mysql /usr/include/lua5.4 \
+    /home/darkeden /home/darkeden/vs /home/darkeden/vs/src
+
+RUN ln -s /usr/include/* /usr/include/lua5.4 && \
+    ln -s /usr/include/perconaserver/* /usr/include/mysql && \
+    ln -s /usr/lib/libperconaserverclient.so /usr/lib/libmysqlclient.so
+
+WORKDIR /home/darkeden/vs/src

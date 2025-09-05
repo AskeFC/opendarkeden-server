@@ -29,8 +29,8 @@ MYSQLDIR = /usr/local/lib/mysql
 CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I. -I../
-CCFLAGS  = -Wall -c -g  
-#CCFLAGS  = -Wall -c -g 
+CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mtune=native -msse4 -mavx2 -mpclmul
+#CCFLAGS  = -Wall -c -g
 LIBS     = -L$(LIBDIR) -lServerCore -lCore -lMofus
 SYSLIBS  = -L$(MYSQLDIR) -static -lpthread -lnsl -lz
 

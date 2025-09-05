@@ -27,7 +27,7 @@ DBDIR    = ./database
 CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(DBDIR) -I.
-CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mpclmul
+CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mtune=native -msse4 -mavx2 -mpclmul
 #CCFLAGS  = -Wall -c -g 
 
 DEPDIR = .deps

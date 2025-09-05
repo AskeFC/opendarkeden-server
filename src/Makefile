@@ -14,8 +14,8 @@ LIBDIR    = $(VSHOME)/lib
 LOGDIR    = $(VSHOME)/log
 TEMPDIR   = $(VSHOME)/temp
 
-CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mpclmul
-CFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mpclmul
+CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mtune=native -msse4 -mavx2 -mpclmul
+CFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mtune=native -msse4 -mavx2 -mpclmul
 #----------------------------------------------------------------------
 # actions
 #----------------------------------------------------------------------

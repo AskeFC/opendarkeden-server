@@ -34,8 +34,8 @@ DEFS     = -D__LINUX__ -D_REENTRANT
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(DBDIR) -I$(GSDIR) -I$(LSDIR) -I$(BILLDIR) -I.
 INCLUDES_GS = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(DBDIR) -I$(GSDIR) -I$(BILLDIR) -I.
 INCLUDES_LS = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(DBDIR) -I$(LSDIR) -I$(BILLDIR) -I.
-#CCFLAGS  = -Wall -c -g  
-CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mtune=native -msse4 -mavx2 -mpclmul
+#CCFLAGS  = -Wall -c -g
+CCFLAGS  = -std=c++14 -Wall -c -g -m64 -mcmodel=large -O3 -march=native -mtune=native -mpclmul -pthread -flto=auto -ffat-lto-objects -mtls-dialect=gnu2 -fstack-protector-all -mstack-protector-guard=tls
 #LIBS     = -L$(LIBDIR) -lGameServerDatabase -lServerCore -lCore
 #SYSLIBS  = -L$(MYSQLDIR) -static -lpthread -lnsl -lmysqlclient -lz
 

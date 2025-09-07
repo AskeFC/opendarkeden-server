@@ -39,8 +39,8 @@ PYINCDIR = /usr/local/include/python2.2
 CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT -D__GAME_SERVER__  -D__COMBAT__
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(DBDIR) -I$(SKILLDIR) -I$(ITEMDIR) -I$(BILLINGDIR) -I$(WARDIR) -I$(COUPLEDIR) -I$(TESTDIR) -I$(MISSIONDIR) -I.
-CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mtune=native -msse4 -mavx2 -mpclmul
-#CCFLAGS  = -Wall -c -g 
+CCFLAGS  = -std=c++14 -Wall -c -g -m64 -mcmodel=large -O3 -march=native -mtune=native -mpclmul -pthread -flto=auto -ffat-lto-objects -mtls-dialect=gnu2 -fstack-protector-all -mstack-protector-guard=tls
+#CCFLAGS  = -Wall -c -g
 #LIBS     = -L$(LIBDIR) -lItems -lQuest -lMofus -lGameServerDatabase -lServerCore -lGameServerPackets -lSkill -lCore -lGameServerBilling -lLuaScript -lGameServerTest -lWar -lCouple -lMission -lCTF -lGameServerCBilling -lxerces-c -lsicuuc -lsicudata -lCSAuth
 LIBS     = -L$(LIBDIR) -lItems -lQuest -lMofus -lGameServerDatabase -lServerCore -lGameServerPackets -lSkill -lCore -lGameServerBilling -lLuaScript -lWar -lCouple -lMission -lCTF -lGameServerCBilling
 #SYSLIBS  = -L$(MYSQLDIR) -static -lpthread -lnsl -lutil -ldl -lmysqlclient -llua -llualib -lz -lcppunit

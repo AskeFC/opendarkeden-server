@@ -614,7 +614,7 @@ SRCS = $(CORE_SRCS) $(LC_PACKET_SRC) $(LG_PACKET_SRC) $(CL_PACKET_SRC) $(GL_PACK
 CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT
 INCLUDES = -I./loki -I$(SERVDIR) -I$(DBDIR) -I$(GSDIR) -I$(SKILLDIR) -I$(ITEMDIR) -I$(BILLINGDIR) -I.
-CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mtune=native -msse4 -mavx2 -mpclmul
+CCFLAGS  = -std=c++14 -Wall -c -g -m64 -mcmodel=large -O3 -march=native -mtune=native -mpclmul -pthread -flto=auto -ffat-lto-objects -mtls-dialect=gnu2 -fstack-protector-all -mstack-protector-guard=tls
 
 # .cpp.o : 
 # 	$(CC) $(CCFLAGS) $(DEFS) $(INCLUDES) $<

@@ -34,8 +34,8 @@ CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT -D__GAME_SERVER__ 
 #-D__QUEST_TEST__
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(DBDIR) -I$(GSDIR) -I$(SKILLDIR) -I$(ITEMDIR) -I$(QUESTDIR) -I.
-CCFLAGS  = -std=c++14 -Wall -c -g -O3 -march=x86-64-v3 -mtune=native -msse4 -mavx2 -mpclmul
-#CCFLAGS  = -Wall -c -g 
+CCFLAGS  = -std=c++14 -Wall -c -g -m64 -mcmodel=large -O3 -march=native -mtune=native -mpclmul -pthread -flto=auto -ffat-lto-objects -mtls-dialect=gnu2 -fstack-protector-all -mstack-protector-guard=tls
+#CCFLAGS  = -Wall -c -g
 
 #LIBS     = -L$(LIBDIR) -lGameServerDatabase -lServerCore -lGameServerPackets -lCore
 #SYSLIBS  = -L$(MYSQLDIR) -static -lpthread -lnsl -lmysqlclient -lz

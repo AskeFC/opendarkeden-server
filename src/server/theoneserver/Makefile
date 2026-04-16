@@ -28,7 +28,7 @@ MYSQLDIR = /usr/local/lib/mysql
 CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT -D__THE_ONE_SERVER__
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(DBINCDIR) -I.
-CCFLAGS  = -std=c++14 -Wall -c -g -m64 -mcmodel=large -Ofast -march=native -mtune=native -mpclmul -pthread -flto=auto -ffat-lto-objects -mtls-dialect=gnu2 -fstack-protector-all -mstack-protector-guard=tls -fgraphite-identity -floop-parallelize-all -fmodulo-sched -fmodulo-sched-allow-regmoves
+CCFLAGS  = -std=c++14 -Wall -c -g -m64 -mcmodel=large -Ofast -march=native -mtune=native -mpclmul -pthread -flto=auto -ffat-lto-objects -mtls-dialect=gnu2 -fstack-protector-all -mstack-protector-guard=tls -fgraphite-identity -floop-parallelize-all -fmodulo-sched -fmodulo-sched-allow-regmoves -fno-strict-aliasing
 #CCFLAGS  = -Wall -c -g
 LIBS     = -L$(LIBDIR) -lCore -lTheOneServerPackets -lServerCore 
 #LIBS     = -L$(LIBDIR) -lTheOneServerPackets -lItems -lQuest -lGameServerDatabase -lServerCore -lGameServerPackets -lSkill -lCore -lGameServerBilling -lLuaScript -lGameServerTest -lWar -lCouple -lMission -lCTF -lGameServerCBilling

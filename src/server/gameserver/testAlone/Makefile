@@ -33,7 +33,7 @@ CPPUNITDIR = /usr/local/include/cppunit
 CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT -D__GAME_SERVER__
 INCLUDES = -I. -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(DBDIR) -I$(GSDIR) -I$(SKILLDIR) -I$(CPPUNITDIR) -I$(WARDIR)
-CCFLAGS  = -std=c++14 -Wall -c -g -m64 -mcmodel=large -Ofast -march=native -mtune=native -mpclmul -pthread -flto=auto -ffat-lto-objects -mtls-dialect=gnu2 -fstack-protector-all -mstack-protector-guard=tls -fgraphite-identity -floop-parallelize-all -fmodulo-sched -fmodulo-sched-allow-regmoves
+CCFLAGS  = -std=c++14 -Wall -c -g -m64 -mcmodel=large -Ofast -march=native -mtune=native -mpclmul -pthread -flto=auto -ffat-lto-objects -mtls-dialect=gnu2 -fstack-protector-all -mstack-protector-guard=tls -fgraphite-identity -floop-parallelize-all -fmodulo-sched -fmodulo-sched-allow-regmoves -fno-strict-aliasing
 #CCFLAGS  = -Wall -c -g
 LIBS	 = #-L$(LIBDIR) -lWar
 SYSLIBS  = -lcppunit

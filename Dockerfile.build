@@ -1,4 +1,4 @@
-FROM cachyos/cachyos-v3
+FROM cachyos/cachyos-v3:latest
 
 RUN pacman -Syyu --noconfirm && pacman -S --noconfirm \
     gcc \
@@ -11,10 +11,10 @@ RUN pacman -Syyu --noconfirm && pacman -S --noconfirm \
     psmisc
 
 RUN mkdir \
-    /usr/include/mysql /usr/include/lua5.4 \
+    /usr/include/mysql /usr/include/lua5.5 \
     /home/darkeden /home/darkeden/vs /home/darkeden/vs/src
 
-RUN ln -s /usr/include/* /usr/include/lua5.4 && \
+RUN ln -s /usr/include/* /usr/include/lua5.5 && \
     ln -s /usr/include/perconaserver/* /usr/include/mysql && \
     ln -s /usr/lib/libperconaserverclient.so /usr/lib/libmysqlclient.so
 

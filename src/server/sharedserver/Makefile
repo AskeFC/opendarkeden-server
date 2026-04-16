@@ -30,7 +30,7 @@ PYTHONDIR = /usr/local/include/python2.2
 CC       = g++
 DEFS     = -D__LINUX__ -D_REENTRANT -D__SHARED_SERVER__
 INCLUDES = -I$(STLDIR) -I$(COREDIR) -I$(SERVDIR) -I$(DBDIR) -I$(DBINCDIR) -I$(PYTHONDIR) -I.
-CCFLAGS  = -std=c++14 -Wall -c -g -m64 -mcmodel=large -Ofast -march=native -mtune=native -mpclmul -pthread -flto=auto -ffat-lto-objects -mtls-dialect=gnu2 -fstack-protector-all -mstack-protector-guard=tls -fgraphite-identity -floop-parallelize-all -fmodulo-sched -fmodulo-sched-allow-regmoves
+CCFLAGS  = -std=c++14 -Wall -c -g -m64 -mcmodel=large -Ofast -march=native -mtune=native -mpclmul -pthread -flto=auto -ffat-lto-objects -mtls-dialect=gnu2 -fstack-protector-all -mstack-protector-guard=tls -fgraphite-identity -floop-parallelize-all -fmodulo-sched -fmodulo-sched-allow-regmoves -fno-strict-aliasing
 #CCFLAGS  = -Wall -c -g
 #LIBS     = -L$(LIBDIR) -lDatabase -lSharedServerPackets -lGameServerPackets -lServerCore -lCore
 LIBS     = -L$(LIBDIR) -lDatabase -lSharedServerPackets -lServerCore -lCore

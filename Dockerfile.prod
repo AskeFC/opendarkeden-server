@@ -1,4 +1,4 @@
-FROM cachyos/cachyos-v3
+FROM cachyos/cachyos-v3:latest
 
 RUN pacman -Syyu --noconfirm && pacman -S --noconfirm \
     xerces-c \
